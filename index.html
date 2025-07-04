@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat Pagi, Cinta!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; font-family: sans-serif;
+      background: #fff; overflow: hidden; color: #000;
+    }
+    .slide {
+      display: none; width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 20px;
+    }
+    .slide.active {
+      display: flex; flex-direction: column;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    button {
+      padding: 12px 24px; font-size: 18px;
+      margin: 10px; border: none;
+      border-radius: 12px; cursor: pointer;
+    }
+    .pink { background: pink; color: #000; }
+    .button-love { font-size: 24px; padding: 14px 28px; }.bubble-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 4s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0.7; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+  </style>
+</head>
+<body><!-- Slide 1: Pilihan --><div class="slide active" id="slide1">
+  <h2 style="font-size: 24px;">😘😘🤍🤍</h2>
+  <p style="margin-top: 10px; font-size: 20px;">Mau lanjut atau tidak?</p>
+  <div>
+    <button class="button-love" onclick="goToSlideWithBubbles(2)">😘🤍🤍: mao lanjut</button>
+    <button class="button-love" onclick="window.open('about:blank','_self').close()">😞😞🥀: tidak mauu</button>
+  </div>
+</div><!-- Slide 2: Ucapan lanjut --><div class="slide" id="slide2" style="background:pink;">
+  <div class="bubble-container" id="bubble2"></div>
+  <h2>YEYYYYY MAOOO LANJUT 💕</h2>
+  <p style="margin: 10px; font-size: 18px;">
+    makasihh ya uda klik button MAOOO LANJUTT. cieee excited bangett. uhuuu. lagii kenapaa sihh. ceritaaa dongg??!..
+    Oh iya aku ada ucapan sesuatu untukk dedeee. 😁😁💐. bentall yaaaa.
+  </p>
+  <div>
+    <button onclick="goToSlideWithBubbles(3)">⏩ lanjut</button>
+    <button onclick="goToSlide(1)">⏪ tidaa</button>
+  </div>
+</div><!-- Slide 3: Good morning message --><div class="slide" id="slide3">
+  <div class="bubble-container" id="bubble3"></div>
+  <p style="font-size: 18px;">
+    nih good morning my lovee, semangatt yaa buat hari ini yaa, jangan lupa buat sarapan sama mandi biar ga bauu,
+    kalau nanti hari kamu buruk jangan sedih yaa kamu bisa cerita sama aku, don't be sad, I'm here.
+    sekarang kamu punya aku, kamu bisa ceritain semua hari kamu ke aku dan aku bakal dengerin semua cerita kamu okeee?
+    ohhhh yaa, don't forget to brush your teeth, biar gigi kamu bersih dan wangii oke??
+    jangan lupa berdoa selalu sama tuhan kamu apapun yang mau kamu lakukan oke?
+    kamu juga harus inget sama tuhan kamu, I wanna tell you something, I'm so lucky to have you,
+    I'm so lucky to know you, because kamu selalu selalu ngertiin aku dan selalu ada buat aku,
+    aku udah jatuh cinta sama kamu. kamu selalu ada disaat aku butuh kamu disaat senang maupun sedih kamu selalu ada buat aku,😘😘🤍🤍
+  </p>
+  <p style="margin-top: 10px;">mao lanjut??</p>
+  <div>
+    <button onclick="goToSlideWithBubbles(4)">😘🤍🤍: mao lanjut</button>
+    <button onclick="goToSlide(1)">😞😞🥀: tidak mauu</button>
+  </div>
+</div><!-- Slide 4: Amplop --><div class="slide" id="slide4">
+  <h2>📩 Klik amplopnya yaa</h2>
+  <button onclick="showEnvelope()" style="font-size:50px;">💌</button>
+</div><!-- Slide 5: Ucapan akhir --><div class="slide" id="slide5">
+  <div class="bubble-container" id="bubbleContainer"></div>
+  <p style="font-size: 20px; position: relative; z-index: 1;">
+    terimakasih sudah hadir dalam hidupku, semoga hari hari kamu selalu indah ya? semangat buat hari ini,
+    i love you more than anything lovee 🤍💐😁
+  </p>
+  <button onclick="goToSlide(1)" style="position: relative; z-index: 1;">🔁 Kembali Awal</button>
+</div><script>
+function goToSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.getElementById(`slide${n}`).classList.add('active');
+}
+
+function goToSlideWithBubbles(n) {
+  goToSlide(n);
+  generateBubbles("bubble" + n);
+}
+
+function showEnvelope() {
+  goToSlide(5);
+  generateBubbles("bubbleContainer");
+}
+
+function generateBubbles(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  const symbols = ['❤','💞','💖','💕','💗'];
+  for (let i = 0; i < 30; i++) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.style.left = Math.random() * 100 + "%";
+    bubble.style.bottom = "0";
+    bubble.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    bubble.style.animationDelay = (Math.random() * 2) + "s";
+    container.appendChild(bubble);
+  }
+}
+</script></body>
+</html>
